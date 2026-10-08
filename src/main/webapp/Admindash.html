@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+<form action="useradd" method="post">
+    <br><br>
+    <label>Name:<input type="text" name="username" required></label>
+    <br><br>
+    <label>Email:<input type="email" name="email" required></label>
+    <br><br>
+    <label>Age:<input type="number" name="age" required></label>
+    <br><br>
+    <label>Role:
+        <input type="radio" name="role" value="admin">Admin
+        <input type="radio" name="role" value="viewers">viewers
+        <input type="radio" name="role" value="operator">Operator
+
+    </label>
+    <br><br>
+    <button type="submit">Add User</button>
+    <br><br>
+    <a href="viewusers">View Users</a>
+    <br><br>
+    <a href="deleteusers">Delete Users</a>
+    <br><br>
+    <a href="addtask">Add new task</a>
+</form>
+
+</body>
+</html>
