@@ -6,65 +6,28 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.net.http.HttpRequest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@WebServlet("/viewerdash")
-public class ViewersDash extends HttpServlet {
+@WebServlet("/viewtask")
+public class ViewTask extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
-        response.getWriter().println("<h1>Users Tables To Viewer Dashboard</h1><br><br>");
+        response.getWriter().println("<h1>Edit Task</h1><br>");
         //        if(session==null||!"ADMIN".equalsIgnoreCase((String)session.getAttribute("role")))
         //        {
         //            response.sendRedirect("index.html");
         //            return;
         //        }
-        String sql="select id,username,email,age,password,role from users where role!='ADMIN'";
-        String sql1="select * from task";
+        String sql="select * from task";
         try(Connection connection=DBConnection.getConnection();
             PreparedStatement statement= connection.prepareStatement(sql);
-            PreparedStatement statement1= connection.prepareStatement(sql1);
-            ResultSet resultSet=statement.executeQuery();
-            ResultSet resultSet1=statement1.executeQuery()
+            ResultSet resultSet=statement.executeQuery()
         )
         {
-            response.setContentType("text/html");
-            response.getWriter().println("<html><body>");
-            response.getWriter().println("<h2>Users</h2>");
-            response.getWriter().println("<table border=\"1\">" +
-                    "<tbody>" +
-                    "<thead>" +
-                    "<br><br><b>Worker list</b><br><br>"+
-                    "<td> ID </td>" +
-                    "<td> NAME </td>" +
-                    "<td> EMAIL </td>" +
-                    "<td> AGE </td>" +
-                    "<td> ROLE </td>" +
-                    "</thead>");
-            while (resultSet.next())
-            {
-                int id=resultSet.getInt("id");
-                String username=resultSet.getString("username");
-                String email=resultSet.getString("email");
-                int age=resultSet.getInt("age");
-                String role=resultSet.getString("role");
-
-
-                response.getWriter().println("<td>"+id+"</td>");
-                response.getWriter().println("<td>"+username+"</td>");
-                response.getWriter().println("<td>"+email+"</td>");
-                response.getWriter().println("<td>"+age+"</td>");
-                response.getWriter().println("<td>"+role+"</td>");
-                response.getWriter().println("</tbody>");
-
-//Viewer to view task
-
-
-            }
             response.setContentType("text/html");
             response.getWriter().println("<table border=\"1\">" +
                     "<tbody>" +
@@ -77,16 +40,18 @@ public class ViewersDash extends HttpServlet {
                     "<td> Status </td>" +
                     "<td> Create AT </td>" +
                     "<td> priority </td>" +
+                    "<td> Modify </td>" +
+
                     "</thead>");
-            while(resultSet1.next())
+            while(resultSet.next())
             {
-                int taskid=resultSet1.getInt("id");
-                String title= resultSet1.getString("title");
-                String descr=resultSet1.getString("descr");
-                String sched_at=resultSet1.getString("sched_at");
-                String status=resultSet1.getString("status");
-                String creat_at=resultSet1.getString("creat_at");
-                String priority=resultSet1.getString("priority");
+                int taskid=resultSet.getInt("id");
+                String title= resultSet.getString("title");
+                String descr=resultSet.getString("descr");
+                String sched_at=resultSet.getString("sched_at");
+                String status=resultSet.getString("status");
+                String creat_at=resultSet.getString("creat_at");
+                String priority=resultSet.getString("priority");
 
                 response.getWriter().println("<td>"+taskid+"</td>");
                 response.getWriter().println("<td>"+title+"</td>");
@@ -95,6 +60,7 @@ public class ViewersDash extends HttpServlet {
                 response.getWriter().println("<td>"+status+"</td>");
                 response.getWriter().println("<td>"+creat_at+"</td>");
                 response.getWriter().println("<td>"+priority+"</td>");
+                response.getWriter().println("<td>"+"<a href='modifytask?id="+taskid+"'>Modify</a></td>");
                 response.getWriter().println("</tbody>");
 
             }

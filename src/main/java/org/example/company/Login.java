@@ -42,12 +42,13 @@ public class Login extends HttpServlet{
                 {
                     response.sendRedirect("operatordash");
                 }
-                else {
-                    response.setContentType("text/html");
 
-                    response.getWriter().println("Invalid User id or password");
 
-                }
+            }
+            else {
+                response.setContentType("text/html");
+
+                response.getWriter().println("Invalid User id or password");
 
             }
         } catch (SQLException e) {

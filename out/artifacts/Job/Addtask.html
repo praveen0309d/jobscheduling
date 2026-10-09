@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Tasks</title>
+</head>
+<body>
+<form action="addtask" method="post">
+    <h1><b>Add Task</b></h1>
+    <br><br>
+    <label>Job Title<input type="text" name="title"></label>
+    <br><br>
+    <label>Job descr<input type="text" name="descr"></label>
+    <br><br>
+    <label>Scheduling At<input type="datetime-local" name="sched_at"></label>
+    <label>Assigned To<input type="number" name="assign_to_id"></label>
+<!--    <br><br>-->
+<!--    <label>Status-->
+<!--        <select name="status" required>-->
+<!--            <option value="PENDING">PENDING</option>-->
+<!--            <option value="SUCCESS">SUCCESS</option>-->
+<!--            <option value="FAILED">FAILED</option>-->
+<!--            <option value="RETRYING">RETRYING</option>-->
+<!--        </select>-->
+<!--    </label>-->
+    <br><br>
+    <label>Priority
+        <select name="priority" required>
+            <option value="LOW">Low</option>
+            <option value="MEDIUM">Medium</option>
+            <option value="HIGH">High</option>
+        </select>
+    </label>
+    <br><br><button type="submit">Add task</button>
+</form>
+
+</body>
+</html>
